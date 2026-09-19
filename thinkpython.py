@@ -19,8 +19,8 @@ def extract_function_name(text):
         return None
 
 
-# the functions that define cell magic commands are only defined
-# if we're running in Jupyter.
+# as funções que definem comandos mágicos de célula só são definidas
+# se estivermos rodando no Jupyter.
 
 try:
     from IPython.core.magic import register_cell_magic
@@ -29,36 +29,36 @@ try:
     @register_cell_magic
     def add_method_to(args, cell):
 
-        # get the name of the function defined in this cell
+        # obtém o nome da função definida nesta célula
         func_name = extract_function_name(cell)
         if func_name is None:
             return f"This cell doesn't define any new functions."
 
-        # get the class we're adding it to
+        # obtém a classe à qual vamos adicioná-la
         namespace = get_ipython().user_ns
         class_name = args
         cls = namespace.get(class_name, None)
         if cls is None:
             return f"Class '{class_name}' not found."
 
-        # save the old version of the function if it was already defined
+        # guarda a versão antiga da função, se ela já estava definida
         old_func = namespace.get(func_name, None)
         if old_func is not None:
             del namespace[func_name]
 
-        # Execute the cell to define the function
+        # Executa a célula para definir a função
         get_ipython().run_cell(cell)
 
-        # get the newly defined function
+        # obtém a função recém-definida
         new_func = namespace.get(func_name, None)
         if new_func is None:
             return f"This cell didn't define {func_name}."
 
-        # add the function to the class and remove it from the namespace
+        # adiciona a função à classe e a remove do namespace
         setattr(cls, func_name, new_func)
         del namespace[func_name]
 
-        # restore the old function to the namespace
+        # restaura a função antiga no namespace
         if old_func is not None:
             namespace[func_name] = old_func
 

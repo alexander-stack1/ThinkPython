@@ -18,7 +18,7 @@ def structshape(ds):
     """
     typename = type(ds).__name__
 
-    # handle sequences
+    # trata sequências
     sequence = (list, tuple, set, type(iter('')))
     if isinstance(ds, sequence):
         t = []
@@ -27,7 +27,7 @@ def structshape(ds):
         rep = '%s of %s' % (typename, listrep(t))
         return rep
 
-    # handle dictionaries
+    # trata dicionários
     elif isinstance(ds, dict):
         keys = set()
         vals = set()
@@ -38,7 +38,7 @@ def structshape(ds):
                                    setrep(keys), setrep(vals))
         return rep
 
-    # handle other types
+    # trata outros tipos
     else:
         if hasattr(ds, '__class__'):
             return ds.__class__.__name__

@@ -1,6 +1,7 @@
 # Book settings
-title: Think Python
+title: Pense em Python
 author: Allen B. Downey
+copyright: "2024 Allen B. Downey. Tradução educacional para o português brasileiro, 2026, sem fins lucrativos."
 
 latex:
   latex_documents:
@@ -21,10 +22,11 @@ html:
              src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" />
       </a>
       <br />
-      This work is licensed under a
+      Esta obra, de Allen B. Downey (2024), está licenciada sob a
       <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">
-        Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+        Creative Commons Atribuição-NãoComercial-CompartilhaIgual 4.0 Internacional
       </a>.
+      Tradução educacional para o português brasileiro (2026), sem fins lucrativos.
     </div>
 
 parse:

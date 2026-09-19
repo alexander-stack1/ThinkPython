@@ -1,10 +1,10 @@
 format: jb-book
 root: index
 parts:
-- caption: Front Matter
+- caption: Páginas iniciais
   chapters:
   - file: chap00
-- caption: Chapters
+- caption: Capítulos
   numbered: True
   chapters:
     - file: chap01
@@ -26,6 +26,6 @@ parts:
     - file: chap17
     - file: chap18
     - file: chap19
-- caption: End Matter
+- caption: Páginas finais
   chapters:
   - file: blank

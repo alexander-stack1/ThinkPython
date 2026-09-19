@@ -33,37 +33,37 @@ def underride(d1, **d2):
 def diagram(width=5, height=1, **options):
     fig, ax = plt.subplots(**options)
 
-    # TODO: dpi in the notebook should be 100, in the book it should be 300 or 600
+    # TODO: o dpi no notebook deve ser 100; no livro, 300 ou 600
     # fig.set_dpi(100)
 
-    # Set figure size
+    # Define o tamanho da figura
     fig.set_size_inches(width, height)
 
     plt.rc('font', size=8)
 
-    # Set axes position
+    # Define a posição dos eixos
     ax.set_position([0, 0, 1, 1])
 
-    # Set x and y limits
+    # Define os limites de x e y
     ax.set_xlim(0, width)
     ax.set_ylim(0, height)
     
-    # Remove the spines, ticks, and labels
+    # Remove as bordas, os ticks e os rótulos
     despine(ax)
     return ax
 
 def despine(ax):
-    # Remove the spines
+    # Remove as bordas
     ax.spines['right'].set_visible(False)
     ax.spines['top'].set_visible(False)
     ax.spines['bottom'].set_visible(False)
     ax.spines['left'].set_visible(False)
 
-    # Remove the axis labels
+    # Remove os rótulos dos eixos
     ax.set_xticklabels([])
     ax.set_yticklabels([])
 
-    # Remove the tick marks
+    # Remove as marcas de escala
     ax.tick_params(axis='both', which='both', length=0, width=0)
 
 def adjust(x, y, bbox):
@@ -170,7 +170,7 @@ class Binding(object):
 
         if draw_value:
             bbox3 = self.value.draw(ax, x+dx, y+dy)
-            # only include the arrow if we drew the value
+            # só inclui a seta se desenhamos o valor
             bboxes.extend([bbox2, bbox3])
 
         bbox = Bbox.union(bboxes)
@@ -225,7 +225,7 @@ class Value(object):
 
 class Arrow(object):
     def __init__(self, **options):
-        # Note for the future about dotted arrows
+        # Nota para o futuro sobre setas pontilhadas
         # self.arrowprops = dict(arrowstyle="->", ls=':')
         arrowprops = dict(arrowstyle="->", color='gray')
         options = underride(options, arrowprops=arrowprops)
@@ -298,7 +298,7 @@ class Frame(object):
         else:
             bboxes = []
 
-        # draw the bindings
+        # desenha as ligações
         for binding in self.bindings:
             bbox = binding.draw(ax, x, y)
             bboxes.append(bbox)
@@ -344,7 +344,7 @@ class Stack(object):
         dx = options.pop('dx', 0)
         dy = options.pop('dy', -0.4)
         
-        # draw the frames
+        # desenha os frames
         bboxes = []
         for frame in self.frames:
             bbox = frame.draw(ax, x, y)

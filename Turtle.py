@@ -9,11 +9,11 @@ import re
 #         by: Tolga Atam
 # from https://github.com/tolgaatam/ColabTurtle/blob/master/ColabTurtle/Turtle.py
 
-# vX.X.X Updated at by Allen Downey for Think Python 3e
+# vX.X.X Atualizado por Allen Downey para Think Python 3e
 
-# Module for drawing classic Turtle figures on Google Colab notebooks.
-# It uses html capabilites of IPython library to draw svg shapes inline.
-# Looks of the figures are inspired from Blockly Games / Turtle (blockly-games.appspot.com/turtle)
+# Módulo para desenhar figuras clássicas de tartaruga em notebooks do Google Colab.
+# Usa os recursos HTML da biblioteca IPython para desenhar formas SVG no próprio documento.
+# O visual das figuras é inspirado no Blockly Games / Turtle (blockly-games.appspot.com/turtle)
 
 DEFAULT_WINDOW_SIZE = (300, 150)
 DEFAULT_SPEED = 6
@@ -25,7 +25,7 @@ DEFAULT_BACKGROUND_COLOR = 'white'
 DEFAULT_IS_PEN_DOWN = True
 DEFAULT_SVG_LINES_STRING = ""
 DEFAULT_PEN_WIDTH = 2
-# all 140 color names that modern browsers support. taken from https://www.w3schools.com/colors/colors_names.asp
+# os 140 nomes de cores que os navegadores modernos aceitam. fonte: https://www.w3schools.com/colors/colors_names.asp
 VALID_COLORS = ('black', 'navy', 'darkblue', 'mediumblue', 'blue', 'darkgreen', 'green', 'teal', 'darkcyan', 'deepskyblue', 'darkturquoise', 'mediumspringgreen', 'lime', 'springgreen', 'aqua', 'cyan', 'midnightblue', 'dodgerblue', 'lightseagreen', 'forestgreen', 'seagreen', 'darkslategray', 'darkslategrey', 'limegreen', 'mediumseagreen', 'turquoise', 'royalblue', 'steelblue', 'darkslateblue', 'mediumturquoise', 'indigo', 'darkolivegreen', 'cadetblue', 'cornflowerblue', 'rebeccapurple', 'mediumaquamarine', 'dimgray', 'dimgrey', 'slateblue', 'olivedrab', 'slategray', 'slategrey', 'lightslategray', 'lightslategrey', 'mediumslateblue', 'lawngreen', 'chartreuse', 'aquamarine', 'maroon', 'purple', 'olive', 'gray', 'grey', 'skyblue', 'lightskyblue', 'blueviolet', 'darkred', 'darkmagenta', 'saddlebrown', 'darkseagreen', 'lightgreen', 'mediumpurple', 'darkviolet', 'palegreen', 'darkorchid', 'yellowgreen', 'sienna', 'brown', 'darkgray', 'darkgrey', 'lightblue', 'greenyellow', 'paleturquoise', 'lightsteelblue', 'powderblue', 'firebrick', 'darkgoldenrod', 'mediumorchid', 'rosybrown', 'darkkhaki', 'silver', 'mediumvioletred', 'indianred', 'peru', 'chocolate', 'tan', 'lightgray', 'lightgrey', 'thistle', 'orchid', 'goldenrod', 'palevioletred', 'crimson', 'gainsboro', 'plum', 'burlywood', 'lightcyan', 'lavender', 'darksalmon', 'violet', 'palegoldenrod', 'lightcoral', 'khaki', 'aliceblue', 'honeydew', 'azure', 'sandybrown', 'wheat', 'beige', 'whitesmoke', 'mintcream', 'ghostwhite', 'salmon', 'antiquewhite', 'linen', 'lightgoldenrodyellow', 'oldlace', 'red', 'fuchsia', 'magenta', 'deeppink', 'orangered', 'tomato', 'hotpink', 'coral', 'darkorange', 'lightsalmon', 'orange', 'lightpink', 'pink', 'gold', 'peachpuff', 'navajowhite', 'moccasin', 'bisque', 'mistyrose', 'blanchedalmond', 'papayawhip', 'lavenderblush', 'seashell', 'cornsilk', 'lemonchiffon', 'floralwhite', 'snow', 'yellow', 'lightyellow', 'ivory', 'white')
 VALID_COLORS_SET = set(VALID_COLORS)
 DEFAULT_TURTLE_SHAPE = 'circle'
@@ -51,7 +51,7 @@ TURTLE_CIRCLE_SVG_TEMPLATE = """
 SPEED_TO_SEC_MAP = {1: 1.5, 2: 0.9, 3: 0.7, 4: 0.5, 5: 0.3, 6: 0.18, 7: 0.12, 8: 0.06, 9: 0.04, 10: 0.02, 11: 0.01, 12: 0.001, 13: 0.0001}
 
 
-# helper function that maps [1,13] speed values to ms delays
+# função auxiliar que mapeia valores de velocidade [1,13] para atrasos em ms
 def _speedToSec(speed):
     return SPEED_TO_SEC_MAP[speed]
 
@@ -72,7 +72,7 @@ turtle_shape = DEFAULT_TURTLE_SHAPE
 drawing_window = None
 
 
-# construct the display for turtle
+# monta a exibição da tartaruga
 def make_turtle(speed=DEFAULT_SPEED, width=DEFAULT_WINDOW_SIZE[0], height=DEFAULT_WINDOW_SIZE[1]):
     global window_size
     global drawing_window
@@ -112,7 +112,7 @@ def make_turtle(speed=DEFAULT_SPEED, width=DEFAULT_WINDOW_SIZE[0], height=DEFAUL
     drawing_window = display(HTML(_generateSvgDrawing()), display_id=True)
 
 
-# helper function for generating svg string of the turtle
+# função auxiliar que gera a string SVG da tartaruga
 def _generateTurtleSvgDrawing():
     if is_turtle_visible:
         vis = 'visible'
@@ -137,14 +137,14 @@ def _generateTurtleSvgDrawing():
                                       visibility=vis, degrees=degrees, rotation_x=turtle_pos[0], rotation_y=turtle_pos[1])
 
 
-# helper function for generating the whole svg string
+# função auxiliar que gera a string SVG inteira
 def _generateSvgDrawing():
     return SVG_TEMPLATE.format(window_width=window_size[0], window_height=window_size[1],
                                background_color=background_color, lines=svg_lines_string,
                                turtle=_generateTurtleSvgDrawing())
 
 
-# helper functions for updating the screen using the latest positions/angles/lines etc.
+# funções auxiliares para atualizar a tela com as posições, ângulos e linhas mais recentes.
 def _updateDrawing():
     if drawing_window == None:
         raise AttributeError("Display has not been initialized yet. Call make_turtle() before using.")
@@ -152,12 +152,12 @@ def _updateDrawing():
     drawing_window.update(HTML(_generateSvgDrawing()))
 
 
-# helper function for managing any kind of move to a given 'new_pos' and draw lines if pen is down
+# função auxiliar para qualquer movimento até 'new_pos' e para desenhar linhas se a caneta estiver abaixada
 def _moveToNewPosition(new_pos):
     global turtle_pos
     global svg_lines_string
 
-    # rounding the new_pos to eliminate floating point errors.
+    # arredonda new_pos para eliminar erros de ponto flutuante.
     new_pos = ( round(new_pos[0],3), round(new_pos[1],3) )
 
     start_pos = turtle_pos
@@ -169,7 +169,7 @@ def _moveToNewPosition(new_pos):
     _updateDrawing()
 
 
-# makes the turtle move forward by 'units' units
+# faz a tartaruga avançar 'units' unidades
 def forward(units):
     if not isinstance(units, (int,float)):
         raise ValueError('units must be a number.')
@@ -181,7 +181,7 @@ def forward(units):
 
 fd = forward # alias
 
-# makes the turtle move backward by 'units' units
+# faz a tartaruga recuar 'units' unidades
 def backward(units):
     if not isinstance(units, (int,float)):
         raise ValueError('units must be a number.')
@@ -191,7 +191,7 @@ bk = backward # alias
 back = backward # alias
 
 
-# makes the turtle move right by 'degrees' degrees (NOT radians)
+# faz a tartaruga girar 'degrees' graus à direita (NÃO radianos)
 def right(degrees):
     global turtle_degree
 
@@ -203,7 +203,7 @@ def right(degrees):
 
 rt = right # alias
 
-# makes the turtle face a given direction
+# faz a tartaruga apontar para uma direção dada
 def face(degrees):
     global turtle_degree
 
@@ -216,7 +216,7 @@ def face(degrees):
 setheading = face # alias
 seth = face # alias
 
-# makes the turtle move right by 'degrees' degrees (NOT radians, this library does not support radians right now)
+# faz a tartaruga girar 'degrees' graus à direita (NÃO radianos; esta biblioteca ainda não aceita radianos)
 def left(degrees):
     if not isinstance(degrees, (int,float)):
         raise ValueError('degrees must be a number.')
@@ -224,23 +224,23 @@ def left(degrees):
 
 lt = left
 
-# raises the pen such that following turtle moves will not cause any drawings
+# levanta a caneta para que os movimentos seguintes não desenhem
 def penup():
     global is_pen_down
 
     is_pen_down = False
-    # TODO: decide if we should put the timout after lifting the pen
+    # TODO: decidir se o timeout deve vir depois de levantar a caneta
     # _updateDrawing()
 
 pu = penup # alias
 up = penup # alias
 
-# lowers the pen such that following turtle moves will now cause drawings
+# abaixa a caneta para que os movimentos seguintes passem a desenhar
 def pendown():
     global is_pen_down
 
     is_pen_down = True
-    # TODO: decide if we should put the timout after releasing the pen
+    # TODO: decidir se o timeout deve vir depois de abaixar a caneta
     # _updateDrawing()
 
 pd = pendown # alias
@@ -249,8 +249,8 @@ down = pendown # alias
 def isdown():
     return is_pen_down
 
-# update the speed of the moves, [1,13]
-# if argument is omitted, it returns the speed.
+# atualiza a velocidade dos movimentos, [1,13]
+# se o argumento for omitido, devolve a velocidade.
 def speed(speed = None):
     global turtle_speed
 
@@ -260,11 +260,11 @@ def speed(speed = None):
     if isinstance(speed,int) == False or speed not in range(1, 14):
         raise ValueError('speed must be an integer in the interval [1,13].')
     turtle_speed = speed
-    # TODO: decide if we should put the timout after changing the speed
+    # TODO: decidir se o timeout deve vir depois de mudar a velocidade
     # _updateDrawing()
 
 
-# move the turtle to a designated 'x' x-coordinate, y-coordinate stays the same
+# move a tartaruga para a coordenada x indicada; y permanece o mesmo
 def setx(x):
     if not isinstance(x, (int,float)):
         raise ValueError('new x position must be a number.')
@@ -273,7 +273,7 @@ def setx(x):
     _moveToNewPosition((x, turtle_pos[1]))
 
 
-# move the turtle to a designated 'y' y-coordinate, x-coordinate stays the same
+# move a tartaruga para a coordenada y indicada; x permanece o mesmo
 def sety(y):
     if not isinstance(y, (int,float)):
         raise ValueError('new y position must be a number.')
@@ -286,33 +286,33 @@ def home():
     global turtle_degree
 
     turtle_degree = DEFAULT_TURTLE_DEGREE
-    _moveToNewPosition( (window_size[0] // 2, window_size[1] // 2) ) # this will handle updating the drawing.
+    _moveToNewPosition( (window_size[0] // 2, window_size[1] // 2) ) # isto cuida de atualizar o desenho.
 
-# retrieve the turtle's currrent 'x' x-coordinate
+# obtém a coordenada x atual da tartaruga
 def getx():
     return(turtle_pos[0])
 
 xcor = getx # alias
 
-# retrieve the turtle's currrent 'y' y-coordinate
+# obtém a coordenada y atual da tartaruga
 def gety():
     return(turtle_pos[1])
 
 ycor = gety # alias
 
-# retrieve the turtle's current position as a (x,y) tuple vector
+# obtém a posição atual da tartaruga como vetor (x, y)
 def position():
     return turtle_pos
 
 pos = position # alias
 
-# retrieve the turtle's current angle
+# obtém o ângulo atual da tartaruga
 def getheading():
     return turtle_degree
 
 heading = getheading # alias
 
-# move the turtle to a designated 'x'-'y' coordinate
+# move a tartaruga para a coordenada x-y indicada
 def moveto(x, y=None):
     if isinstance(x, tuple) and y is None:
         if len(x) != 2:
@@ -335,7 +335,7 @@ goto = moveto # alias
 setpos = moveto # alias
 setposition = moveto # alias
 
-# jump to a given location without leaving a trail
+# salta para um lugar dado sem deixar rastro
 def jumpto(x, y=None):
     flag = is_pen_down
     penup()
@@ -343,7 +343,7 @@ def jumpto(x, y=None):
     if flag:
         pendown()
 
-# switch turtle visibility to ON
+# torna a tartaruga visível
 def showturtle():
     global is_turtle_visible
 
@@ -352,7 +352,7 @@ def showturtle():
 
 st = showturtle # alias
 
-# switch turtle visibility to OFF
+# torna a tartaruga invisível
 def hideturtle():
     global is_turtle_visible
 
@@ -365,11 +365,11 @@ def isvisible():
     return is_turtle_visible
 
 def _validateColorString(color):
-    if color in VALID_COLORS_SET: # 140 predefined html color names
+    if color in VALID_COLORS_SET: # 140 nomes de cores HTML predefinidos
         return True
-    if re.search("^#(?:[0-9a-fA-F]{3}){1,2}$", color): # 3 or 6 digit hex color code
+    if re.search("^#(?:[0-9a-fA-F]{3}){1,2}$", color): # código hexadecimal de 3 ou 6 dígitos
         return True
-    if re.search("rgb\(\s*(?:(?:\d{1,2}|1\d\d|2(?:[0-4]\d|5[0-5]))\s*,?){3}\)$", color): # rgb color code
+    if re.search("rgb\(\s*(?:(?:\d{1,2}|1\d\d|2(?:[0-4]\d|5[0-5]))\s*,?){3}\)$", color): # código de cor RGB
         return True
     return False
 
@@ -395,8 +395,8 @@ def _processColor(color):
     else:
         raise ValueError('the first parameter must be a color string or a tuple')
 
-# change the background color of the drawing area
-# if no params, return the current background color
+# muda a cor de fundo da área de desenho
+# sem parâmetros, devolve a cor de fundo atual
 def bgcolor(color = None, c2 = None, c3 = None):
     global background_color
 
@@ -411,8 +411,8 @@ def bgcolor(color = None, c2 = None, c3 = None):
     _updateDrawing()
 
 
-# change the color of the pen
-# if no params, return the current pen color
+# muda a cor da caneta
+# sem parâmetros, devolve a cor atual da caneta
 def color(color = None, c2 = None, c3 = None):
     global pen_color
 
@@ -428,8 +428,8 @@ def color(color = None, c2 = None, c3 = None):
 
 pencolor = color
 
-# change the width of the lines drawn by the turtle, in pixels
-# if the function is called without arguments, it returns the current width
+# muda a largura das linhas desenhadas pela tartaruga, em pixels
+# se a função for chamada sem argumentos, devolve a largura atual
 def width(width = None):
     global pen_width
 
@@ -442,13 +442,13 @@ def width(width = None):
             raise ValueError('new width position must be positive.')
 
         pen_width = width
-        # TODO: decide if we should put the timout after changing the pen_width
+        # TODO: decidir se o timeout deve vir depois de mudar pen_width
         # _updateDrawing()
 
-# pensize is an alias for width
+# pensize é um alias de width
 pensize = width
 
-# clear any text or drawing on the screen
+# apaga texto e desenho da tela
 def clear():
     global svg_lines_string
 
@@ -506,10 +506,10 @@ def shape(shape=None):
     turtle_shape = shape
     _updateDrawing()
 
-# return turtle window width
+# devolve a largura da janela da tartaruga
 def window_width():
     return window_size[0]
 
-# return turtle window height
+# devolve a altura da janela da tartaruga
 def window_height():
     return window_size[1]
